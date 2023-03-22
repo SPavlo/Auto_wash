@@ -6,6 +6,7 @@ import QueryList from "./components/QueryList";
 import {BrowserRouter} from "react-router-dom";
 import './styles/App.css'
 import AppRouter from "./components/AppRouter";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

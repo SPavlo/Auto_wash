@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import QueryList from "../components/QueryList";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+
 
 const Admin = () => {
     const [queryList, setQueryList] = useState([
@@ -19,10 +22,28 @@ const Admin = () => {
     return (
         <div>
             <Header/>
-            <Navigation/>
-            <h1>Запити та потреби</h1>
-            <QueryList queryList={queryList} />
-            <QueryList queryList={reportList} />
+            <Tabs
+                defaultActiveKey="query"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+            >
+                <Tab eventKey="query" title="Запити та потреби">
+                    <QueryList queryList={queryList}/>
+                </Tab>
+                <Tab eventKey="report" title="Звіти">
+                    <QueryList queryList={reportList}/>
+                </Tab>
+                <Tab eventKey="statistic" title="Статистика">
+                   <div>Статистика</div>
+                </Tab>
+                <Tab eventKey="status" title="Статус автомийок">
+                    <div>Статус автомийок</div>
+                </Tab>
+
+            </Tabs>
+            {/*<h1>Запити та потреби</h1>*/}
+            {/*<QueryList queryList={queryList} />*/}
+            {/*<QueryList queryList={reportList} />*/}
         </div>
     );
 };
