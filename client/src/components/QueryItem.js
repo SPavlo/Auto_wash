@@ -10,12 +10,7 @@ const QueryItem = ({queryItem}) => {
             <div>
                 {queryItem.body}
             </div>
-            <div>
-                {queryItem.checked
-                ?"Непрочитано"
-                :"Прочитано"
-                }
-            </div>
+
         </div>
     );
 };
