@@ -8,39 +8,28 @@ import ReportsList from "../components/ReportsList";
 import ReportsItem from "../components/ReportsItem";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {queryListMock, reportListMock, washListMock} from "../mockData";
 
 const Admin = () => {
+
     const [show, setShow] = useState(false);
     const [location, setLocation] = useState('')
     const [amount, setAmount] = useState('')
 
-    const [wash,setWash] = useState([
-        {id:334, location:'м.Київ, вул. Січових Стрільців 12', workStatus:true},
-        {id:335, location:'м.Черкаси, вул. Шевченка 11', workStatus:true},
-        {id:324, location:'м.Полтава, вул. Мазепи 23', workStatus:false},
-        {id:134, location:'м.Київ, вул. Петра Сагайдачного 29', workStatus:true},
-    ])
-
-    const [queryList, setQueryList] = useState([
-        {id:1, date:'02.13.2023', body:"Потрібно оновити запаси", checked:true, washId:334 },
-        {id:2, date:'03.03.2023', body:"Потрібно Зробити техогляд ", checked:false,washId:335 },
-        {id:3, date:'12.26.2023', body:"Потрібно оновити термінал", checked:true,washId:324 },
-        {id:4, date:'11.22.2023', body:"Закінчилось у запаси", checked:false,washId:134 },
-    ])
-    const [reportList, setReportList] = useState([
-        {id:1, date:'02.13.2023', body:"Тижневий звіт", checked:true, },
-        {id:2, date:'03.03.2023', body:"Тижневий звіт ", checked:true, },
-        {id:3, date:'12.26.2023', body:"Тижневий звіт", checked:true, },
-        {id:4, date:'11.22.2023', body:"Тижневий звіт", checked:false, },
-    ])
+    const [wash,setWash] = useState(washListMock)
+    const [queryList, setQueryList] = useState(queryListMock.sort((a, b) => (a.checked === b.checked) ? 0 : a.checked ? -1 : 1).reverse())
+    const [reportList, setReportList] = useState(reportListMock)
 
     useEffect(()=>{
         sortList(queryList)
+        console.log("useEfect")
     },[reportList,queryList])
 
     const sortList = (list) =>{
         const sortedList = list.sort((a, b) => (a.checked === b.checked) ? 0 : a.checked ? -1 : 1);
+        console.log(sortedList)
         setQueryList(sortedList)
+        console.log(queryList)
     }
     const addNewWash = () =>{
         const newWash = {
