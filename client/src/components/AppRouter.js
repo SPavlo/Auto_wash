@@ -3,7 +3,6 @@ import {Routes, Route, Redirect, Navigate} from 'react-router-dom'
 import {authRoutes, publicRoutes} from "../routes";
 const AppRouter = () => {
     const isAuth = true
-    console.log('AppRouter')
     return (
         <Routes>
             {isAuth&&authRoutes.map(({path,Component})=>

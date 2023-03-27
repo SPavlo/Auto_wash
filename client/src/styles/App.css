@@ -15,10 +15,20 @@
 
 
 }
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
 .list-item{
     display: flex;
     padding: 15px;
     border: 2px solid teal;
     margin-top: 15px;
     justify-content: space-between;
+    width: 90%;
+}
+.checked{
+    opacity: 0.5;
 }
