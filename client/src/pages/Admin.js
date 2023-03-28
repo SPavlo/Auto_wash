@@ -1,17 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Header from "../components/Header";
-import Navigation from "../components/Navigation";
 import QueryList from "../components/QueryList";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import ReportsList from "../components/ReportsList";
-import ReportsItem from "../components/ReportsItem";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {queryListMock, reportListMock, washListMock} from "../mockData";
 import Accordion from 'react-bootstrap/Accordion';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import Card from 'react-bootstrap/Card';
+import Statistics from "../components/Statistics";
+import {DateRangePicker} from "rsuite";
 
 function CustomToggle({ children, eventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey, () =>
@@ -131,7 +130,7 @@ const Admin = () => {
                     </Accordion>
                 </Tab>
                 <Tab eventKey="statistic" title="Статистика">
-                   <div>Статистика</div>
+                   <Statistics/>
                 </Tab>
                 <Tab eventKey="status" title="Статус автомийок">
                     <div className="list">
