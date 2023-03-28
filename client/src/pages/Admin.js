@@ -9,6 +9,25 @@ import ReportsItem from "../components/ReportsItem";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {queryListMock, reportListMock, washListMock} from "../mockData";
+import Accordion from 'react-bootstrap/Accordion';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import Card from 'react-bootstrap/Card';
+
+function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionButton(eventKey, () =>
+        console.log('totally custom!'),
+    );
+
+    return (
+        <Button
+            variant="info"
+            onClick={decoratedOnClick}
+        >
+            {children}
+        </Button>
+    );
+}
+
 
 const Admin = () => {
 
@@ -61,7 +80,55 @@ const Admin = () => {
                     <QueryList queryList={queryList}/>
                 </Tab>
                 <Tab eventKey="report" title="Звіти">
-                    <ReportsList reportList={reportList}/>
+                    <Accordion defaultActiveKey="0">
+                        {reportList.map((reportItem)=>
+                            <Card>
+                                <Card.Header>
+                                    <div className="report-item">
+                                        <div>
+                                            Дата:
+                                            {reportItem.date}
+                                        </div>
+                                        <div>
+                                            {reportItem.body}
+                                        </div>
+                                        <div>
+                                            {wash.find((w) => w.id === reportItem.washId).location}
+                                        </div>
+                                        <CustomToggle eventKey={reportItem.id}>Деталі</CustomToggle>
+                                    </div>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey={reportItem.id}>
+                                    <Card.Body>
+                                        <div>
+                                            <div>
+                                                <span>
+                                                    Витрати:{' '}
+                                                </span>
+                                                <span>
+                                                    {reportItem.costs} грн
+                                                </span>
+
+                                            </div>
+                                            <div>
+                                                <span>
+                                                    Дохід:{' '}
+                                                </span>
+                                                <span>
+                                                  {reportItem.income} грн
+                                                </span>
+
+                                            </div>
+                                            <div>
+
+                                            </div>
+                                        </div>
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        )}
+
+                    </Accordion>
                 </Tab>
                 <Tab eventKey="statistic" title="Статистика">
                    <div>Статистика</div>
@@ -81,8 +148,9 @@ const Admin = () => {
                                 </div>
                             </div>
                         )}
+
                     </div>
-                    <Button variant="primary" onClick={handleShow}>
+                    <Button variant="primary" className="add-btn" onClick={handleShow}>
                         Додати автомийку
                     </Button>
 
